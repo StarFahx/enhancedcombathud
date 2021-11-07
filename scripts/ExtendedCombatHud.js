@@ -830,7 +830,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           return false;
         }
 
-        let newTotal = data.prof + this.hudData.saves[abilityScore].mod;
+        let newTotal = Math.floor(data.proficient * data.prof._baseProficiency) + this.hudData.saves[abilityScore].mod;
         $element
           .closest(".ability")
           .find(".ability-modifier")
@@ -1475,7 +1475,7 @@ class ECHDiceRoller {
       return;
     }
     const abl = this.actor.data.data.abilities[ability];
-    const data = { mod: abl.mod + skl.prof };
+    const data = { mod: abl.mod + Math.floor(skl.proficient * skl.prof._baseProficiency) };
     if (skl.ability != ability)
       libWrapper.register(
         "enhancedcombathud",
