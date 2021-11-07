@@ -27,6 +27,7 @@
     margin-bottom: -1px;
     padding: 0.75rem;
     position: relative;
+    background-color: rgba(0 0 0 / 30%);
 }
 .portrait-stat-block:not(.player-details):before{
     backdrop-filter: blur(6px);

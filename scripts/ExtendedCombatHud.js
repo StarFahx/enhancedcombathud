@@ -514,6 +514,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.css(position);
     this.toggleMinimize($("body").hasClass("minimize-ech-hud"));
     this.toggleMacroPlayers(false);
+
+    // can't update portrait until html exists, this is not the right place to do it but it is a convenient one
+    let ad = this.hudData.token.actor.data.data.attributes;
+    canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
   }
 
   toggleMinimize(forceState) {
@@ -1072,15 +1076,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let hpelel = $(this.element).find("span[data-hp-value]");
     let maxhpel = $(this.element).find("span[data-hp-max]");
     let acelel = $(this.element).find("span[data-ac-value]");
-    hpelel[0].dataset.hpValue = hp.value + hp.temp;
-    maxhpel[0].dataset.hpMax = hp.max + hp.tempmax;
+    hpelel[0].dataset.hpValue = Number(hp.value) + Number(hp.temp);
+    maxhpel[0].dataset.hpMax = Number(hp.max) + Number(hp.tempmax);
     acelel[0].dataset.acValue = ac;
-    hpelel.css({ color: hp.temp ? "#6698f3" : "rgb(0 255 170)" });
+    hpelel.css({ color: Number(hp.temp) ? "rgb(82, 248, 145)" : "rgb(90, 190, 245)" });
     maxhpel.css({
-      color: hp.tempmax
-        ? hp.tempmax > 0
-          ? "rgb(222 91 255)"
-          : "#ffb000"
+      color: Number(hp.tempmax)
+        ? Number(hp.tempmax) > 0
+          ? "#ffb000"
+          : "#b000ff"
         : "rgb(255, 255, 255)",
     });
   }
