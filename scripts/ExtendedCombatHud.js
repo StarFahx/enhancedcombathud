@@ -1540,7 +1540,7 @@ class ECHDiceRoller {
 
     // Compose roll parts and data
     const parts = ["@mod"];
-    const data = { mod: skl.mod + skl.prof };
+    const data = { mod: skl.mod + Math.floor(skl.proficient * skl.prof._baseProficiency) };
 
     // Ability test bonus
     if (bonuses.check) {
